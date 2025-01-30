@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\StorePostRequest;
-use App\Http\Requests\Api\UpdatePostRequest;
+use App\Http\Requests\Api\Post\StorePostRequest;
+use App\Http\Requests\Api\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Response;
