@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->text('content');
-            $table->string('user')->nullable();
+            $table->text('content')->nullable();
+            $table->foreignId('profile_id')->index()->constrained('profiles');
             $table->boolean('is_published')->default(true);
-            $table->string('categories')->nullable();
-            $table->unsignedInteger('likes')->default(0);
             $table->string('image_path')->unique()->nullable();
-            $table->string('tag')->nullable();
+            $table->foreignId('category_id')->index()->constrained('categories');
             $table->unsignedInteger('views')->default(0);
             $table->dateTime('published_at')->nullable();
             $table->timestamps();

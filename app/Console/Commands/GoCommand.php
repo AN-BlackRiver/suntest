@@ -2,7 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Profile;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class GoCommand extends Command
@@ -26,19 +30,25 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        /*$post = Post::query()->create([
-           'title' => 'test',
-           'content' => 'test',
-        ]);*/
+        $post = Post::first();
 
-        $post = Post::query()->find(3);
+        $post->like(1);
 
-        /*$post->update([
-            'title' => 'Updated title',
-        ]);*/
+        dd("success");
+          /*dd($post->category->toArray());
+        dd($post->tags->toArray());*/
 
-        $post->delete();
 
-        dd(200, "OK");
+        /*$category = Category::first();
+          dd($category->posts);*/
+
+        /*$tag = Tag::first();
+        dd($tag->posts->toArray());*/
+
+        /*$user = User::first();
+        dd($user->profile->toArray());*/
+
+        /* $profile = Profile::first();
+        dd($profile->user->toArray());*/
     }
 }
