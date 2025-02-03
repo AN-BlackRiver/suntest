@@ -21,10 +21,10 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-    public function like(int $userId)
+    public function like(int $profileId)
     {
         DB::table('post_profile_likes')->insert([
-            'user_id' => $userId,
+            'profile_id' => $profileId,
             'post_id' => $this->id,
         ]);
     }

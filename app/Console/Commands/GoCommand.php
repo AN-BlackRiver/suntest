@@ -30,11 +30,11 @@ class GoCommand extends Command
      */
     public function handle()
     {
-        $post = Post::first();
+        //$post = Post::first();
 
-        $post->like(1);
+        //$post->like(1);
 
-        dd("success");
+        //dd($post->likes->count());
           /*dd($post->category->toArray());
         dd($post->tags->toArray());*/
 
