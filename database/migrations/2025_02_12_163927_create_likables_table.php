@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_profile_likes', function (Blueprint $table) {
+        Schema::create('likables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id')->constrained('profiles');
-            $table->foreignId('post_id')->constrained('posts');
+            $table->morphs('likable');
+            $table->foreignId('profile_id')->index()->constrained('profiles');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_profile_likes');
+        Schema::dropIfExists('likables');
     }
 };

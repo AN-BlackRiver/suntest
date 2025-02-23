@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
-
+    use HasFactory;
+    public function profile(): BelongsTo
+    {
+        return $this->belongsTo(Profile::class);
+    }
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -21,21 +29,19 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-    public function like(int $profileId)
+
+    public function likedByPosts() : MorphToMany
     {
-        DB::table('post_profile_likes')->insert([
-            'profile_id' => $profileId,
-            'post_id' => $this->id,
-        ]);
+        return $this->MorphToMany(Profile::class, 'likable');
     }
 
-    public function likes() : BelongsToMany
+    public function comments(): MorphMany
     {
-        return $this->belongsToMany(
-            Profile::class,
-            'post_profile_likes',
-            'post_id',
-            'profile_id'
-        );
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }
