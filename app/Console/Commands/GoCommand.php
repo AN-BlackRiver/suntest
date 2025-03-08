@@ -30,6 +30,12 @@ class GoCommand extends Command
     public function handle()
     {
 
+        $tag = Tag::find(34);
+        $tag->delete();
+        echo 200 . "OK";
+
+
+
         /** ПРОВЕРКА ОТНОШЕНИЙ **/
 
 //        $user1 = User::find(1);
@@ -131,9 +137,9 @@ class GoCommand extends Command
         /** Многие ко многим ***/
 //          $posts = Post::find(2);
 //        $posts->likedByPosts()->toggle(1);
-         $comments = Comment::first();
-         $comments->likedByComment()->toggle(1);
-        //  $profile = Profile::first();
+//         $comments = Comment::first();
+//         $comments->likedByComment()->toggle(1);
+//          $profile = Profile::first();
         //  dd($profile->likedComments->toArray());
         //   dd($profile->likedPosts->toArray());
 
