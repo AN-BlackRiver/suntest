@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\User\StoredUserEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\StoreUserRequest;
 use App\Http\Requests\Api\User\UpdateUserRequest;
@@ -27,6 +28,8 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $user = User::query()->create($data);
+
+        StoredUserEvent::dispatch($user);
 
         return $user;
     }

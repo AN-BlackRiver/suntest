@@ -15,6 +15,8 @@ class TagController extends Controller
 
     public function index()
     {
+        $tags = Tag::filter(['title'])->get();
+
         return TagResource::collection(Tag::all())->resolve();
     }
 

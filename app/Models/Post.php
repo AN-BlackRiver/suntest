@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Http\Filter\PostFilter;
+use App\Models\Traits\HasFilter;
+use App\Models\Traits\HasLogDisk;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +19,8 @@ use Illuminate\Support\Facades\DB;
 class Post extends Model
 {
     use HasFactory;
+    use HasLogDisk;
+    use HasFilter;
     public function profile(): BelongsTo
     {
         return $this->belongsTo(Profile::class);

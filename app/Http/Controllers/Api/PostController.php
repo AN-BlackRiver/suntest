@@ -3,20 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filter\PostFilter;
+use App\Http\Middleware\IsPostCreatorMiddleware;
+use App\Http\Requests\Api\Post\IndexRequest;
 use App\Http\Requests\Api\Post\StorePostRequest;
 use App\Http\Requests\Api\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(IndexRequest $request)
     {
-        return PostResource::collection(Post::all())->resolve();
+        $data = $request->validated();
+
+        $posts = Post::filter($data)->get();
+
+        return PostResource::collection($posts)->resolve();
     }
 
     /**

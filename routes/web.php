@@ -1,55 +1,22 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-/*Route::prefix('users')->group(function () {
-    Route::get('/', [UserController::class, 'index']);
-    Route::get('/{user}/show', [UserController::class, 'show']);
-    Route::get('/store', [UserController::class, 'store']);
-    Route::get('/{user}/update', [UserController::class, 'update']);
-    Route::get('/{user}/destroy', [UserController::class, 'destroy']);
-});
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('posts')->group(function () {
-    Route::get('/', [PostController::class, 'index']);
-    Route::get('/{post}/show', [PostController::class, 'show']);
-    Route::get('/store', [PostController::class, 'store']);
-    Route::get('/{post}/update', [PostController::class, 'update']);
-    Route::get('/{post}/destroy', [PostController::class, 'destroy']);
-});
-
-Route::prefix('comments')->group(function () {
-    Route::get('/', [CommentController::class, 'index']);
-    Route::get('/{comment}/show', [CommentController::class, 'show']);
-    Route::get('/store', [CommentController::class, 'store']);
-    Route::get('/{comment}/update', [CommentController::class, 'update']);
-    Route::get('/{comment}/destroy', [CommentController::class, 'destroy']);
-});
-
-Route::prefix('tags')->group(function () {
-    Route::get('/', [TagController::class, 'index']);
-    Route::get('/{tag}/show', [TagController::class, 'show']);
-    Route::get('/store', [TagController::class, 'store']);
-    Route::get('/{tag}/update', [TagController::class, 'update']);
-    Route::get('/{tag}/destroy', [TagController::class, 'destroy']);
-});
-
-Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'index']);
-    Route::get('/{category}/show', [CategoryController::class, 'show']);
-    Route::get('/store', [CategoryController::class, 'store']);
-    Route::get('/{category}/update', [CategoryController::class, 'update']);
-    Route::get('/{category}/destroy', [CategoryController::class, 'destroy']);
-});
-
-Route::prefix('roles')->group(function () {
-    Route::get('/', [RoleController::class, 'index']);
-    Route::get('/{role}/show', [RoleController::class, 'show']);
-    Route::get('/store', [RoleController::class, 'store']);
-    Route::get('/{role}/update', [RoleController::class, 'update']);
-    Route::get('/{role}/destroy', [RoleController::class, 'destroy']);
-});*/
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';

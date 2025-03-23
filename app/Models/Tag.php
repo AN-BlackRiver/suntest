@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasFilter;
+use App\Models\Traits\HasLogDisk;
 use App\Models\Traits\HasLogs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Tag extends Model
 {
     use HasFactory;
-    use HasLogs;
+    use HasLogDisk;
+    use HasFilter;
 
     public function posts(): BelongsToMany
     {
