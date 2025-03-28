@@ -3,9 +3,9 @@ import {Link} from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 export default {
-    name: "posts",
+    name: "tags",
     props: {
-        posts: Array
+        tags: Array
     },
     components: {
         Link,
@@ -17,12 +17,12 @@ export default {
 <template>
     <div>
         <div class="mb-4">
-            <Link :href="route('admin.posts.create')"
+            <Link :href="route('admin.tags.create')"
                   class="inline-block px-3 py-2 bg-indigo-500 text-white border border-indigo-600">Добавить
             </Link>
         </div>
-        <div v-for="post in posts" class="border-b border-gray-200">
-            <Link :href="route('admin.posts.show', post.id)" class="block p-4"> {{ post.title }}</Link>
+        <div v-for="tag in tags" class="border-b border-gray-200">
+            <Link :href="route('admin.tags.show', tag.id)" class="block p-4"> {{ tag.title }}</Link>
         </div>
     </div>
 </template>

@@ -19,7 +19,16 @@ export default {
         <section class="mx-auto flex">
             <aside class="w-1/4 bg-gray-600 min-h-screen">
                 <div>
+                    <Link :href="route('admin.dashboard')" class="block p-4 border-b border-gray-200 text-gray-300">Главная</Link>
+                </div>
+                <div>
                 <Link :href="route('admin.posts.index')" class="block p-4 border-b border-gray-200 text-gray-300">Посты</Link>
+                </div>
+                <div>
+                    <Link :href="route('admin.categories.index')" class="block p-4 border-b border-gray-200 text-gray-300">Категории</Link>
+                </div>
+                <div>
+                    <Link :href="route('admin.tags.index')" class="block p-4 border-b border-gray-200 text-gray-300">Теги</Link>
                 </div>
             </aside>
             <article class="p-4 w-3/4 bg-gray-100">
