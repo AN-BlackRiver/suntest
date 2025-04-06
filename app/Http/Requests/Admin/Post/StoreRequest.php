@@ -19,6 +19,15 @@ class StoreRequest extends FormRequest
             'content' => 'nullable|string',
             'category_id' => 'required|integer|exists:categories,id',
             'published_at' => 'required|date_format:Y-m-d',
+            'image' => 'nullable|file'
         ];
+    }
+
+    protected function passedValidation()
+    {
+        return $this->merge([
+            'profile_id' => \Auth::user()->id
+        ]);
+
     }
 }

@@ -18,13 +18,20 @@ export default {
 
     methods: {
         storePost() {
-            axios.post(route('admin.posts.store'), this.post)
+            axios.post(route('admin.posts.store'), this.post, {
+                headers : {
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
                 .then(res => {
                     console.log(res);
                 })
                 .catch(error => {
 
                 })
+        },
+        addImage(e) {
+            this.post.image = e.target.files[0]
         }
     },
 
@@ -55,6 +62,9 @@ export default {
                     <option disabled selected :value="null">Выберите категорию</option>
                     <option v-for="category in categories" :value="category.id">{{ category.title }}</option>
                 </select>
+            </div>
+            <div class="mb-4">
+                <input @change="addImage" type="file" class="border border-gray-200 w-1/3" placeholder="file">
             </div>
             <div class="mb-4">
                 <a @click.prevent="storePost" href="#"

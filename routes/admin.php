@@ -24,8 +24,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdminMiddleware::c
     Route::get('/tags/create', [TagController::class, 'create'])->name('admin.tags.create');
     Route::get('/tags/{tag}', [TagController::class, 'show'])->name('admin.tags.show');
 
-    Route::post('/tags', function () {
-        dd(111111);
-    })->name('admin.tags.store');
+    Route::post('/tags', [TagController::class, 'store'])->name('admin.tags.store');
 
 });

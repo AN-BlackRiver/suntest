@@ -18,7 +18,6 @@ export default {
         storeCategory() {
             axios.post(route('admin.categories.store'), this.category)
                 .then(res => {
-                    console.log(res);
                 })
                 .catch(error => {
 

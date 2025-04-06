@@ -28,12 +28,13 @@ class TagController extends Controller
         return inertia('Admin/Tag/Create');
     }
 
-    public function store()
+    public function store(StoreRequest $request)
     {
-        dd(111111);
-       /* $data = $request->validated();
+
+        $data = $request->validated();
+
         $tag = TagService::store($data);
-        return TagResource::collection($tag)->resolve();*/
+        return TagResource::make($tag)->resolve();
     }
 
 

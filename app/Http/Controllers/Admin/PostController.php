@@ -32,8 +32,8 @@ class PostController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $data = $request->validated();
-        $data['profile_id'] = auth()->user()->id;
+        $data = $request->validationData();
+        dd($data);
         $post = PostService::store($data);
         return PostResource::make($post)->resolve();
     }
