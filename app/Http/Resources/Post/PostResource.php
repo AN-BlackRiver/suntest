@@ -23,7 +23,7 @@ class PostResource extends JsonResource
             'likes' => $this->likes,
             'views' => $this->views,
             'published_at' => $this->published_at,
-            'image_path' => $this->image_path
+            'image_url' => $this->image_url,
         ];
     }
 }

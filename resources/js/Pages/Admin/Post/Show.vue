@@ -23,9 +23,17 @@ export default {
     <div>
         <div>
             <div class="mb-4 pb-4 border-b border-gray-200">
-                <h1 class="text-3xl font-bold mt-5 mb-4 border-b border-gray-200 pb-4">{{ post.title }}</h1>
-                <p class="border-b border-gray-200 pb-4 mb-4">{{ post.content }}</p>
-                <p><span class="font-bold">Категория</span> : {{post.category.title}}</p>
+                <div>
+
+                    <h1 class="text-3xl font-bold mt-5 mb-4 border-b border-gray-200 pb-4">{{ post.title }}</h1>
+                </div>
+                <div>
+                    <p class="border-b border-gray-200 pb-4 mb-4">{{ post.content }}</p>
+                </div>
+                <p><span class="font-bold">Категория</span> : {{ post.category.title }}</p>
+                <div>
+                    <img :src=post.image_url :alt=post.title>
+                </div>
             </div>
         </div>
     </div>

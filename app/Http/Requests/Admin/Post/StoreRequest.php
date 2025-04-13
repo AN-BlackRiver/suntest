@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Post;
 
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Storage;
 
 class StoreRequest extends FormRequest
 {
@@ -26,7 +28,8 @@ class StoreRequest extends FormRequest
     protected function passedValidation()
     {
         return $this->merge([
-            'profile_id' => \Auth::user()->id
+            'profile_id' => Auth::user()->id,
+            'image_path' => $this->image ? Storage::disk('public')->put('images', $this->image) : null,
         ]);
 
     }

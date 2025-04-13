@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 class Post extends Model
 {
@@ -35,7 +36,6 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-
     public function likedByPosts() : MorphToMany
     {
         return $this->MorphToMany(Profile::class, 'likable');
@@ -49,5 +49,10 @@ class Post extends Model
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->image?->path);
     }
 }

@@ -8,7 +8,6 @@ class PostService
 {
     public static function store(array $data): Post
     {
-
         return Post::query()->create($data);
 
     }

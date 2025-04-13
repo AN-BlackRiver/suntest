@@ -8,13 +8,19 @@ use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\CategoryService;
+use App\Services\ImageUploadService;
 use App\Services\PostService;
 
 class PostController extends Controller
 {
+    public function __construct(public PostService $postService, public ImageUploadService  $imageUploadService)
+    {
+    }
+
     public function index()
     {
-        $posts = PostResource::collection( Post::all())->resolve();
+        $posts = PostResource::collection( Post::latest()->get())->resolve();
         return inertia('Admin/Post/Index', compact('posts'));
     }
 
@@ -27,14 +33,25 @@ class PostController extends Controller
     public function create()
     {
         $categories = CategoryResource::collection(Category::all())->resolve();
+
         return inertia('Admin/Post/Create', compact('categories'));
     }
 
     public function store(StoreRequest $request)
     {
-        $data = $request->validationData();
-        dd($data);
-        $post = PostService::store($data);
+
+        $data = $request->except(['image']);
+
+        $imagePath = $data['image_path'] ?? null;
+
+        unset($data['image_path']);
+
+        $post = $this->postService::store($data);
+
+        if ($imagePath) {
+            $post->image()->create(['path' => $imagePath]);
+        }
+
         return PostResource::make($post)->resolve();
     }
 }
