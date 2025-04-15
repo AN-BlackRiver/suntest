@@ -42,9 +42,9 @@ class PostController extends Controller
 
         $data = $request->except(['image']);
 
-        $imagePath = $data['image_path'] ?? null;
+        $imagePath = $data['post']['image_path'] ?? null;
 
-        unset($data['image_path']);
+        unset($data['post']['image_path']);
 
         $post = $this->postService::store($data);
 

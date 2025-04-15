@@ -31,9 +31,10 @@ export default {
                     <p class="border-b border-gray-200 pb-4 mb-4">{{ post.content }}</p>
                 </div>
                 <p><span class="font-bold">Категория</span> : {{ post.category.title }}</p>
-                <div>
-                    <img :src=post.image_url :alt=post.title>
+                <div class="mt-4">
+                    <img class="w-[600px] h-[350px]" :src=post.image_url :alt=post.title>
                 </div>
+                <div class="mt-4"><a v-for="tag in post.tags" class="text-gray-500 mr-2">#{{tag.title}}</a></div>
             </div>
         </div>
     </div>

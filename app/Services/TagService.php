@@ -12,6 +12,18 @@ class TagService
         return Tag::query()->create($data);
 
     }
+
+    public static function storeBatch(string $tags)
+    {
+        $data = explode(',', $tags);
+        $tagIds = [];
+
+        foreach ($data as $tagTitle) {
+            $tagIds[] = Tag::query()->firstOrCreate(['title' => mb_trim($tagTitle)])->id;
+        }
+
+        return $tagIds;
+    }
     public static function update(Tag $tag, array $data): Tag
     {
         $tag->update($data);

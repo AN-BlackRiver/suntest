@@ -24,6 +24,7 @@ class PostResource extends JsonResource
             'views' => $this->views,
             'published_at' => $this->published_at,
             'image_url' => $this->image_url,
+            'tags' => $this->tags
         ];
     }
 }

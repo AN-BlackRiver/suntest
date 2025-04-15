@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -16,14 +17,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name' => 'blkevr',
-            'email' => 'blkevr@gmail.com',
+            'name' => 'arthur',
+            'email' => 'arthur@gmail.com',
             'password' => Hash::make('12345')
         ]);
 
         $user->profile()->create([
             'name' => 'Arthur'
         ]);
+
+        $role = Role::query()->create(['title' => 'admin']);
+        $user->roles()->attach($role->id);
 
         $this->call([
             CategorySeeder::class,

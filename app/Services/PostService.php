@@ -8,8 +8,11 @@ class PostService
 {
     public static function store(array $data): Post
     {
-        return Post::query()->create($data);
+        $post = Post::query()->create($data['post']);
+        $tagIds = TagService::storeBatch($data['tags']);
+        $post->tags()->attach($tagIds);
 
+        return $post;
     }
     public static function update(Post $post, array $data): Post
     {
